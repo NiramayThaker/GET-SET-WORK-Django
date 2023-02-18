@@ -19,9 +19,9 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
               
-                <div class="navbar-header">
+            <div class="navbar-header">
                 <a class="navbar-brand" href="{% url 'home' %}">GET-SET-WORK</a>
-              </div>
+            </div>
 
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{% url 'home' %}">Home</a></li>
@@ -39,7 +39,14 @@
                   </div>
                 </div>
               </form>
-
+              
+              <div class="navbar-header">
+                {% if request.user.is_authenticated %}
+                    <p style="color: white;">{{ request.user }}</p>
+                {% else %}
+                    <p style="color: white;">LogIn</p>
+                {% endif %}
+                </div>
             </div>
           </nav>
 
