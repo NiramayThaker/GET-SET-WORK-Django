@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .forms import RegistrationForm, JobPostForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import JobPost
 
 
 # Create your views here.
@@ -26,15 +27,24 @@ def sign_up(request):
 
 
 @login_required(login_url='/login/')
-def log_out(request):
-	logout(request)
-
-
-@login_required(login_url='/login/')
 def job_post(request):
 	form = JobPostForm()
 	if request.method == 'POST':
-		pass
+		host = request.user
+		post = request.POST['post']
+		resume = request.FILES.get('resume')
+		exp = request.POST['experience']
+		desc = request.POST['description']
+
+		new_post = JobPost.objects.create(host=host, post=post, resume=resume, experience=exp, description=desc)
+		new_post.save()
+
+		return redirect('/')
 
 	context = {'form': form}
 	return render(request, 'core/job_post.html', context=context)
+
+
+@login_required(login_url='/login/')
+def log_out(request):
+	logout(request)
