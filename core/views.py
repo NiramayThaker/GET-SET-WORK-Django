@@ -25,7 +25,6 @@ def sign_up(request):
 	context = {'form': form}
 	return render(request, 'registration/signup.html', context=context)
 
-
 @login_required(login_url='/login/')
 def job_post(request):
 	form = JobPostForm()
