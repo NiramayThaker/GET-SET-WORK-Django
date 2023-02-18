@@ -1,10 +1,6 @@
 
->
-core/models.py,f\2\f2aa1877262ad8572d1a58fd2492878f7250f7cc
 =
 core/tests.py,f\0\f0ee9b29a9b6fb763d5114e01dacf3beaa34ab94
-=
-core/admin.py,7\5\7504b8b5bc74cdd367c7f4cb37fefcd852215a7d
 K
 core/migrations/__init__.py,2\f\2f9440d333ffafa2ca433d63945c2458813ded5e
 @
