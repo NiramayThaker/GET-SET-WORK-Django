@@ -12,4 +12,4 @@ class JobPost(models.Model):
 	description = models.TextField()
 
 	def __str__(self):
-		return self.host.username
+		return f"{self.host.username} | {self.post}"
