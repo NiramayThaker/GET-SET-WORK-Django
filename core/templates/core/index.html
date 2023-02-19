@@ -20,20 +20,21 @@
             </form>
 
             {% if request.user == job.host %}
-                <form method="post">
+                <form method="post" action="{% url 'delete-post' job.host.id %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" value="{{post.id}}" name="post-id">
+                    <button type="submit" class="btn btn-danger" value="{{host.id}}" name="post-id">
                         DELETE
                     </button>
                 </form>
-
-                <form method="post">
+                
+                <form method="post" action="#">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-warning" value="{{post.id}}" name="post-id">
-                        EDIT
-                    </button>
+                    <a href="{% url 'update-post' job.host.id %}">
+                        <button type="submit" class="btn btn-warning">
+                            EDIT
+                        </button>
+                    </a>
                 </form>
-                {% comment %} <a href="#">Delete</a> {% endcomment %}
             {% endif %}
 
         </div>

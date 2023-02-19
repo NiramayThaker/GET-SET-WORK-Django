@@ -10,8 +10,8 @@ from .models import JobPost
 @login_required(login_url='/login/')
 def index(request):
 	jobs = JobPost.objects.all()
-	context = {'jobs': jobs}
 
+	context = {'jobs': jobs}
 	return render(request, 'core/index.html', context=context)
 
 
@@ -46,6 +46,38 @@ def job_post(request):
 
 	context = {'form': form}
 	return render(request, 'core/job_post.html', context=context)
+
+
+@login_required(login_url='/login/')
+def update_post(request, pk):
+	post_update = JobPost.objects.get(host=pk)
+	form = JobPostForm(instance=post_update)
+
+	if request.user != post_update.host:
+		return HttpResponse("You're not allowed here ..!")
+
+	if request.method == 'POST':
+		post_update.host = request.user
+		post_update.post = request.POST['post']
+		post_update.resume = request.FILES['resume']
+		post_update.exp = request.POST['experience']
+		post_update.desc = request.POST['description']
+
+		# new_post = JobPost.objects.get_or_create(host=host, post=post, resume=resume, experience=exp, description=desc)
+		post_update.save()
+
+		return redirect('/')
+
+	context = {'form': form}
+	return render(request, "core/job_post.html", context=context)
+
+
+@login_required(login_url='/login/')
+def delete_post(request, pk):
+	if request.method == 'POST':
+		post = JobPost.objects.get(host=pk)
+		post.delete()
+	return redirect('home')
 
 
 @login_required(login_url='/login/')
