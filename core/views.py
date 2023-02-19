@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import RegistrationForm, JobPostForm
 from django.contrib.auth import login, logout, authenticate
@@ -10,6 +11,14 @@ from .models import JobPost
 @login_required(login_url='/login/')
 def index(request):
 	jobs = JobPost.objects.all()
+	q = request.GET.get('Q')
+	print(f'\n\n\n\n\n{q}\n\n\n\n\n')
+
+	if q is not None:
+		jobs = JobPost.objects.filter(
+			Q(description__icontains=q) |
+			Q(post__icontains=q)
+		)
 
 	context = {'jobs': jobs}
 	return render(request, 'core/index.html', context=context)
@@ -78,6 +87,14 @@ def delete_post(request, pk):
 		post = JobPost.objects.get(host=pk)
 		post.delete()
 	return redirect('home')
+
+
+@login_required(login_url='/login/')
+def user_profile(request, pk):
+	user_info = JobPost.objects.get(host=pk)
+
+	context = {'user': user_info}
+	return render(request, 'core/user_profile.html', context=context)
 
 
 @login_required(login_url='/login/')

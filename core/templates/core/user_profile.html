@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+
+    <div>
+       <h1><a href="{{user.resume.url}}">{{user.host}}'s Resume</a></h1>
+      <h3>Experience: {{user.experience}}</h3>  
+      <h3>Description: {{user.description}}</h3>  
+    </div>
+
+{% endblock content %}
