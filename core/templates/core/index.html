@@ -13,11 +13,27 @@
 
     <div class="post-container" style="margin: 5% 5% 0 5%;"> 
         <div class="post-file">
-            <a href="{{job.resume.url}}">Resume</a>
+            <a href="{{job.resume.url}}" target="_blank"><button type="submit" class="btn btn-success" value="{{post.id}}" name="post-id">
+                Resume
+            </button></a>
+                
+            </form>
 
             {% if request.user == job.host %}
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" value="{{post.id}}" name="post-id">
+                        DELETE
+                    </button>
+                </form>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning" value="{{post.id}}" name="post-id">
+                        EDIT
+                    </button>
+                </form>
+                {% comment %} <a href="#">Delete</a> {% endcomment %}
             {% endif %}
 
         </div>
