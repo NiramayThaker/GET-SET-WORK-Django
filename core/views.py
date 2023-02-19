@@ -12,7 +12,6 @@ from .models import JobPost
 def index(request):
 	jobs = JobPost.objects.all()
 	q = request.GET.get('Q')
-	print(f'\n\n\n\n\n{q}\n\n\n\n\n')
 
 	if q is not None:
 		jobs = JobPost.objects.filter(
