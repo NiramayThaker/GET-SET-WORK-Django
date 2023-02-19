@@ -9,7 +9,10 @@ from .models import JobPost
 
 @login_required(login_url='/login/')
 def index(request):
-	return render(request, 'core/index.html')
+	jobs = JobPost.objects.all()
+	context = {'jobs': jobs}
+
+	return render(request, 'core/index.html', context=context)
 
 
 def sign_up(request):

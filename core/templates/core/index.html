@@ -1,7 +1,37 @@
 {% extends 'core/base.html' %}
 
+{% load static %}
+
 {% block title %}HOME{% endblock title %}
 
 {% block content %}
-Hello Django ..!
+
+<br>
+<br>
+
+{% for job in jobs %}
+
+    <div class="post-container" style="margin: 5% 5% 0 5%;"> 
+        <div class="post-file">
+            <a href="{{job.resume.url}}">Resume</a>
+
+            {% if request.user == job.host %}
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            {% endif %}
+
+        </div>
+
+        <div class="post-details">
+            <p>@{{job.host}}</p>
+            <p>{{job.post}} | Experience: {{job.experience | floatformat:1}}yr</p>
+            <p>{{job.upload}}
+        </div>
+    </div>
+
+{% endfor %}
+
+<br>
+<br>
+
 {% endblock content %}
