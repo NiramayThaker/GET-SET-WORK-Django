@@ -36,11 +36,12 @@
                     </a>
                 </form>
             {% endif %}
-
         </div>
 
         <div class="post-details">
+            <a href="{% url 'profile' job.host.id %}">
             <p>@{{job.host}}</p>
+            </a>
             <p>{{job.post}} | Experience: {{job.experience | floatformat:1}}yr</p>
             <p>{{job.upload}}
         </div>
