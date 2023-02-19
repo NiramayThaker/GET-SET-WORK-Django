@@ -32,7 +32,7 @@ def job_post(request):
 	if request.method == 'POST':
 		host = request.user
 		post = request.POST['post']
-		resume = request.FILES.get('resume')
+		resume = request.FILES['resume']
 		exp = request.POST['experience']
 		desc = request.POST['description']
 
