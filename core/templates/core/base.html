@@ -43,6 +43,7 @@
               <div class="navbar-header">
                 {% if request.user.is_authenticated %}
                     <p style="color: white;">{{ request.user }}</p>
+                    <a href="{% url 'logout' %}" style="color: red;"">LogOut</a>
                 {% else %}
                     <p style="color: white;">LogIn</p>
                 {% endif %}
