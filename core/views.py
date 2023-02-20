@@ -56,6 +56,7 @@ def job_post(request):
 	context = {'form': form}
 	return render(request, 'core/job_post.html', context=context)
 
+
 @login_required(login_url='/login/')
 def update_post(request, pk):
 	post_update = JobPost.objects.get(host=pk)
