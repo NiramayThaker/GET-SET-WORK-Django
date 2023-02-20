@@ -26,7 +26,7 @@
                         DELETE
                     </button>
                 </form>
-                
+
                 <form method="post" action="#">
                     {% csrf_token %}
                     <a href="{% url 'update-post' job.host.id %}">
@@ -36,6 +36,16 @@
                     </a>
                 </form>
             {% endif %}
+
+            {% if user.is_staff %}
+                <form method="post" action="{% url 'delete-post' job.host.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" value="{{host.id}}" name="post-id">
+                        BAN USER
+                    </button>
+                </form>
+            {% endif %}
+
         </div>
 
         <div class="post-details">

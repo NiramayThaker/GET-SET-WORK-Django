@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import RegistrationForm, JobPostForm
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from .models import JobPost
 
 
@@ -38,6 +38,7 @@ def sign_up(request):
 
 
 @login_required(login_url='/login/')
+# @permission_required('core.add_post', login_url='login', raise_exception=True)
 def job_post(request):
 	form = JobPostForm()
 	if request.method == 'POST':
